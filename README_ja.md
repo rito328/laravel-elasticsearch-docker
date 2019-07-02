@@ -17,6 +17,8 @@ PHP Framework Laravel用 Docker開発環境構築パッケージ for Mac
   - Laravel 最新版
 ### DBコンテナ
 - MySQL 8.0
+### Elasticsearch コンテナ
+- Elasticsearch: 6.5
 ## ソース構造
 ```
 laravel-docker/
@@ -83,6 +85,7 @@ sh order.sh restart  : コンテナを再起動します。
 sh order.sh destroy  : コンテナ・イメージを削除します。
 sh order.sh conn app : appコンテナ（Webサーバ）へ接続します。
 sh order.sh conn db  : dbコンテナ内のMySQLへ接続します。
+sh order.sh conn es  : esコンテナ内のElasticsearchへ接続します。
 sh order.sh help     : ヘルプを表示します。
 ```
 

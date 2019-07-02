@@ -17,6 +17,8 @@ Docker development environment construction package for Laravel application. [fo
   - Laravel: Latest edition
 ### DB container
 - MySQL: 8.0
+### Elasticsearch container
+- Elasticsearch: 6.5
 ## Project Structure
 ```
 laravel-docker/
@@ -82,6 +84,7 @@ sh order.sh restart  : Reboot the container.
 sh order.sh destroy  : Delete containers and images.
 sh order.sh conn app : Connect to app container.
 sh order.sh conn db  : Connect to MySQL in db container.
+sh order.sh conn es  : Connect to Elasticsearch in es container.
 sh order.sh help     : Display help.
 ```
 ## Contributions
