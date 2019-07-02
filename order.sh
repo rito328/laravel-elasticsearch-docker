@@ -38,7 +38,8 @@ function setup () {
      docker-compose exec app php $APP_DIR/artisan key:generate
   fi
 
-  docker-compose exec app dockerize -wait tcp://db:3306
+  docker-compose exec app dockerize -wait tcp://es:9200 -timeout 20s
+  docker-compose exec app dockerize -wait tcp://db:3306 -timeout 20s
   docker-compose exec app php $APP_DIR/artisan migrate --seed
 
   echo "Laravel Server starting..."
@@ -67,6 +68,7 @@ function connect () {
   case "$1" in
     "app" ) connect_app   ;;
     "db"  ) connect_mysql ;;
+    "es"  ) connect_elasticsearch ;;
     ""    ) echo "Please specify the second argument. (app | db)"
   esac
 }
@@ -81,6 +83,9 @@ function connect_mysql () {
 
   docker-compose exec db mysql -u$USER -p$PASSWORD
 }
+function connect_elasticsearch () {
+  docker exec -it laravel_es /bin/bash
+}
 function help () {
   echo "
   +--------------------------------------------------+
@@ -94,11 +99,12 @@ function help () {
       conn    :
            app : Connect to app container.
            db  : Connect to MySQL in db container.
+           es  : Connect to Elasticsearch container.
       help    : Display help.
 
                +-+- Informations -+-+
       Repository of this script :
-        https://github.com/rito328/laravel-docker
+        https://github.com/rito328/laravel-elasticsearch-docker
 
       Author : rito
           Twitter https://twitter.com/rito328
